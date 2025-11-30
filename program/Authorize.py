@@ -32,7 +32,7 @@ def authorize_ship_engage(op):
     return auth_access(f"https://api.spacetraders.io/v2/my/ships/{gva.ship}/{op}", True)
 
 def authorize_ship_nav(op, loc = None):
-    def access(post=True, navi = None): # maybe remove later
+    def access(post=True, navi = None):
         try:
             url = f"https://api.spacetraders.io/v2/my/ships/{gva.ship}/{op}"
             headers = {"Authorization": f"Bearer {gva.current_auth_token}"}
@@ -89,7 +89,7 @@ def call_generic_action(url):
         data = response.json()
 
         if "error" in data:
-            print(f"Error {data['statusCode']}: {data['error']} - {data['message']}")
+            print(f"{data}")
             return None
 
         return data
@@ -125,7 +125,7 @@ def fetch_waypoints():
     data = get_generic_data(f"https://api.spacetraders.io/v2/systems/{gva.system}/waypoints?page=1&limit=20")
     print(data)
     for waypoint in data["data"]:
-        gva.system_waypoints[waypoint["symbol"]] = [waypoint["x"], waypoint["y"]]
+        gva.system_waypoints[waypoint["symbol"]] = [waypoint["x"], waypoint["y"], {"orbitals": waypoint["orbitals"]}]
     pages_max = math.ceil(data["meta"]["total"]/20)
     page = 1
     while page < pages_max:

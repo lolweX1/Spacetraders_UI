@@ -21,6 +21,8 @@ def navigate(funcs):
                 return True
             else:
                 authorize_ship_nav(cmd[0], cmd[1] if len(cmd) > 1 else None)
+                if (cmd[0] == "navigate"):
+                    call_generic_action(f"https://api.spacetraders.io/v2/my/ships/{gva.ship}/chart")
         else:
             return False
         update_ship_data()
@@ -98,3 +100,20 @@ def create(funcs):
         }
         window.set_points(gva.system_waypoints)
     app.exec()
+
+def calc_nearby_waypoints(funcs):
+    dist = int(funcs.replace(" ", ""))
+    print(dist)
+    curr_ship_pos = [gva.ship_data["nav"]["route"]["destination"]["x"], gva.ship_data["nav"]["route"]["destination"]["y"]]
+    retval = {}
+    min = ["", 0]
+    for i in gva.system_waypoints:
+        dist_from = math.sqrt(math.pow((curr_ship_pos[0]-gva.system_waypoints[i][0]), 2) + math.pow((curr_ship_pos[1]-gva.system_waypoints[i][1]), 2))
+        if dist_from < dist and dist_from > 0:
+            retval[i] = dist_from
+            if (min[0] == "" or dist_from < min[1]):
+                min[0] = i
+                min[1] = dist_from
+    retval["closest"] = min
+    print(retval)
+    return retval

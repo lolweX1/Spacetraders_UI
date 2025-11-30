@@ -89,13 +89,13 @@ class SystemCanvas(QtWidgets.QWidget):
                 painter.setBrush(QtGui.QBrush(QtGui.QColor("red")))
             else:
                 painter.setBrush(QtGui.QBrush(QtGui.QColor("white")))
-            painter.drawEllipse(QtCore.QPointF(mx, my), 2, 2)
+            painter.drawEllipse(QtCore.QPointF(mx, my), 5, 5)
             painter.drawText(x + 10 - self.center_data_dir[0], y - 10 - self.center_data_dir[1], name)
         
 class CanvasWindow(QtWidgets.QMainWindow):
-    def __init__(self):
+    def __init__(self, title="Stars Map"):
         super().__init__()
-        self.setWindowTitle("Star Map (Draggable, Zoomable)")
+        self.setWindowTitle(title)
         self.canvas = SystemCanvas()
         self.setCentralWidget(self.canvas)
         self.resize(800, 600)

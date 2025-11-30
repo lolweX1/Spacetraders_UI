@@ -40,4 +40,14 @@ Reorganized tabs, widgets, and layouts
 I completely forgot to log the past few weeks. I removed most of the GUI to create a prompt style UI instead.
 It works pretty well for the most part and I used AI to quickly create a window that can show the stars and the current system. 
 Organized the code in Main as well
-To Do: organize the rest of the code
+To Do: organize the rest of the 
+
+11/14/2025
+Ability to scan and chart waypoints, and to obtain waypoint data
+To-Do: 
+  - fix up try-catches and errors and success
+  - better formatting of data
+  - give waypoint data better
+
+11/29/2025
+Utilizing AI to help me create the GUI so I can spend more time to automate it. 
