@@ -121,15 +121,14 @@ def update_ship_data():
     gva.ship_data = auth_access(f"https://api.spacetraders.io/v2/my/ships/{gva.ship}")["data"]
 
 def fetch_waypoints():
-    print(gva.system)
     data = get_generic_data(f"https://api.spacetraders.io/v2/systems/{gva.system}/waypoints?page=1&limit=20")
-    print(data)
     for waypoint in data["data"]:
-        gva.system_waypoints[waypoint["symbol"]] = [waypoint["x"], waypoint["y"], {"orbitals": waypoint["orbitals"]}]
+        gva.system_waypoints[waypoint["symbol"]] = [waypoint["x"], waypoint["y"]]
     pages_max = math.ceil(data["meta"]["total"]/20)
     page = 1
     while page < pages_max:
         page += 1
         data = get_generic_data(f"https://api.spacetraders.io/v2/systems/{gva.system}/waypoints?page={page}&limit=20")
         for waypoint in data["data"]:
+            print(f"x: {waypoint["x"]}, y: {waypoint["y"]}")
             gva.system_waypoints[waypoint["symbol"]] = [waypoint["x"], waypoint["y"]]

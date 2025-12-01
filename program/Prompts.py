@@ -5,6 +5,7 @@ import re
 from Prompts import *
 from Authorize import *
 from SystemCanvas import *
+from Window import *
 
 nav_cmd = ["orbit", "navigate", "dock", "status", "exit"]
 scan_cmd = ["waypoints", "ships", "systems", "exit"]
@@ -91,14 +92,11 @@ def create(funcs):
     if (funcs[0] =="system"):
         window = CanvasWindow()
         window.show()
-        systems = {
-        "Earth": [100, 150],
-        "Mars": [800, 200],
-        "Venus": [1200, 900],
-        "Jupiter": [300, 1200],
-        "Saturn": [1500, 500],
-        }
         window.set_points(gva.system_waypoints)
+    elif (funcs[0] == "GUI"):
+        window = MainWindow()
+        window.show()
+
     app.exec()
 
 def calc_nearby_waypoints(funcs):

@@ -81,7 +81,7 @@ class SystemCanvas(QtWidgets.QWidget):
         font = painter.font()
         font.setPointSize(3)
         painter.setFont(font)
-
+        print(self.points.items())
         for name, (x, y) in self.points.items():
             mx = x-self.center_data_dir[0]
             my = y-self.center_data_dir[1]

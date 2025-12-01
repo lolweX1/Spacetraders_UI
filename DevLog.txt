@@ -51,3 +51,7 @@ To-Do:
 
 11/29/2025
 Utilizing AI to help me create the GUI so I can spend more time to automate it. 
+Created a GUI that:
+  updates data
+  change ship status and travel
+  give ship details

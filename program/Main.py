@@ -7,29 +7,8 @@ from Authorize import *
 from SystemCanvas import *
 from Automation import *
 from PromptBreakdown import *
-# from PyQt6.QtCore import QTimer, Qt
-# from PyQt6.QtWidgets import (QApplication, QWidget, QMainWindow, QPushButton, 
-#                              QVBoxLayout, QLabel, QPushButton, QHBoxLayout, 
-#                              QSizePolicy, QTabWidget, QLineEdit)
-# from LoginWindow import *
-# from Canvas import *
-# from Window import *
 
-# app = QApplication([])
-
-# def init():
-#     data = accessAgent(gva.current_auth_token)
-
-# verify agent
-# login = Login()
-# if login.exec():
-#     init()
-#     window = MainWindow()
-#     window.show()
-
-# app.exec()
-
-version = "0.401 beta"
+version = "0.412 beta"
 
 commands_help = {
     "nav": "go into ship navigation mode",
@@ -52,7 +31,10 @@ if __name__ == "__main__":
     try:
         data = rq.get("https://api.spacetraders.io/v2/my/ships", headers = {"Authorization": "Bearer " + gva.current_auth_token})
         data = data.json()
+        print(f"data retrieval: {data}")
         gva.system = data["data"][0]["nav"]["systemSymbol"] # CHANGE, have the ability to select different ships
+        gva.ships = [i["symbol"] for i in data["data"]]
+        gva.ships_data = [i for i in data["data"]] # make this into a json file later
         gva.ship = data["data"][0]["symbol"] # CHANGE
         gva.ship_data = data["data"][0] # CHANGE
         print("data retrieval successful")

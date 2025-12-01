@@ -125,6 +125,7 @@ values = {
 }
 def determine_prompt(command):
     import Automation
+    import Main
     """
         A function to break down the given command and execute it as such.
         Args:
@@ -176,7 +177,7 @@ def determine_prompt(command):
         case "create":
             create(prompt[1:] if len(prompt) > 1 else ["system"])
         case "help":
-            print("".join(f"{key} - {commands_help[key]}\n" for key in commands_help))
+            print("".join(f"{key} - {Main.commands_help[key]}\n" for key in Main.commands_help))
         case "nearby":
             calc_nearby_waypoints(prompt[1] if len(prompt) > 1 else "100")
         case "chart":
